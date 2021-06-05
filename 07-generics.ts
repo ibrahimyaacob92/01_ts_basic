@@ -9,15 +9,21 @@ function newSimpleStringState<T>(initial: T): [() => T, (v: T) => void] {
 }
 
 // T is generics once we defined it the rest will follow
-const [st1getter, st1setter] = newSimpleStringState(10); // ! Now T is infered as number
+const [st1getter, st1setter] = newSimpleStringState<number>(10); // ! Now T is infered as number
 console.log(`st1getter()`, st1getter());
 st1setter(534);
 console.log(`st1getter()`, st1getter());
 
-const [st2getter, st2setter] = newSimpleStringState("stringf"); // ! Now T is number
+const [st2getter, st2setter] = newSimpleStringState<string>("stringf"); // ! Now T is number
 console.log(`st1getter()`, st2getter());
 st2setter("world");
 console.log(`st1getter()`, st2getter());
+
+// ? same as above but without overiding the generics
+const [st3getter, st3setter] = newSimpleStringState("stringf"); // ! Now T is string
+const [st4getter, st4setter] = newSimpleStringState(53); // ! Now T is string
+
+
 
 // Generic Interface
 interface Rank<RankItem> {
@@ -60,6 +66,7 @@ const pokemon: Pokemon[] = [
     hp: 5,
   },
 ];
+
 
 const ranks = ranker(pokemon, ({ hp }) => hp);
 console.log(ranks);

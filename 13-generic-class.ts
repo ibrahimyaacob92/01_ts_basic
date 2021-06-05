@@ -52,3 +52,5 @@ const myDB4 = new PersistentMemoryDB2<number>(); // generics defined as number
 myDB4.set("key", 43);
 myDB4.restoreFromString('{"hdfs":"fd"}');
 console.log(myDB4.saveToString());
+
+// You can also have generic keys
